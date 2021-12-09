@@ -6,7 +6,7 @@ setTimeout(() => {
               .append('<p>você deve destruir os planetas rebeldes para acumular pontos. ' + 
               'Cada planeta rebelde destruído vale 10 pontos. cada planeta aliado destruído serão menos 10 pontos. ' + 
               'Se você deixar um planeta rebelde fugir, também perderá 10 pontos. Não colida com os planetas ou perderá. ' +
-              'você precisa 50 pontos ou mais para vencer. Clique para iniciar!</p>')
+              'você precisa 200 pontos ou mais para vencer. Clique para iniciar!</p>')
               .append('<p>comandos: w - mover para cima. a - mover para baixo. s - mover para esquerda. d - mover para direita. espaço - atirar Laser.</p>')
     $('#images').append('<div><img src="../../assets/images/rebelplanet.png" alt="Planeta inimigo"/></div>')
                 .append('<div><img src="../../assets/images/imperialplanet.png" alt="Planeta aliado"/></div>')
@@ -21,6 +21,7 @@ function start() {
     const game = $('#game')
     let points = 0;
     let enemyDestroyed = false
+    let speed = 10
 
     game.append('<div id="player"></div>')
     game.append('<div id="enemy"></div>')
@@ -71,7 +72,7 @@ function start() {
             enemyDestroyed = false
             return
         }
-        enemy.css('right', pos + 13)
+        enemy.css('right', pos + (speed/4) + speed)
     }
 
     function moveAllie() {
@@ -86,7 +87,7 @@ function start() {
             allie.css('top', allieY)
             return
         }
-        allie.css('right', pos + 10)
+        allie.css('right', pos + speed)
     }
 
     function shootLaser() {
@@ -197,11 +198,11 @@ function start() {
             enemyDestroyed = true
             enemy.hide()
             points += 10
-            scorePoints(points)
+            scorePoints(points, true)
         } else {
             points -= 10
             allie.hide()
-            scorePoints(points)
+            scorePoints(points , false)
         }
         clearInterval(laserRoute)
         setTimeout(() => {
@@ -209,8 +210,9 @@ function start() {
         }, 2000)
     }
 
-    function scorePoints(points) {
+    function scorePoints(points, increment) {
         if (points < 0) return endGame()
+        if(points % 50 === 0 && increment) speed += 3
         $('#score').remove()
         pointsDiv.append(`<p id='score'>Pontos: ${points}</p>`)
     }
@@ -225,7 +227,7 @@ function start() {
         pointsDiv.remove()
         $('#menu').empty()
         $('#menu').show()
-        if (points <= 50) {
+        if (points < 200) {
             $('#menu').append('<h1>você falhou com o império!</h1>')
                 .append(`<img src="${failedGif}" alt='O imperador está irritado com você'/>`)
                 .append('<p>você decepcionou nosso imperador. Agora o caos e desordem da rebelião tomarão conta da galáxia.</p>')
