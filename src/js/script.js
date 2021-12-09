@@ -13,7 +13,7 @@ setTimeout(() => {
                 .append('<h2>inimigo</h2>')
                 .append('<h2>aliado</h2>')
     document.getElementById('menu').addEventListener('click', start)
-}, 50)
+}, 25000)
 
 function start() {
     $('#menu').empty()

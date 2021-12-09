@@ -97,7 +97,7 @@ body{
     margin: auto;
     text-align: center;
     color: orange;
-    animation: intro .05s forwards linear;
+    animation: intro 25s forwards linear;
 }
 
 #player{
