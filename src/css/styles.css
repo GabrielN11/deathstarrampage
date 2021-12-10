@@ -26,6 +26,17 @@ body{
     align-items: center;
 }
 
+#switchAudio{
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    padding: 5px;
+    border: 1px solid orange;
+    background-color: rgba(0 ,0 , 0, 0.9);
+    border-radius: 50%;
+    z-index: 2;
+}
+
 #game{
     position: relative;
     width: 950px;
@@ -96,6 +107,7 @@ body{
     height: 100%;
     margin: auto;
     text-align: center;
+    user-select: none;
     color: orange;
     animation: intro 25s forwards linear;
 }
@@ -144,6 +156,7 @@ body{
     background-color: rgba(0, 0, 0, .5);
     color: orange;
     font-size: 1.3rem;
+    z-index: 2;
 }
 
 .points p{
